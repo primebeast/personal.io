@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hemant Kumar Yadav | Business Analyst & Performance Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070a0f;
+    --surface: #0d1117;
+    --surface2: #131a24;
+    --border: #1e2d3d;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #39ff14;
+    --text: #e8edf2;
+    --muted: #6b8299;
+    --heading-font: 'Bebas Neue', cursive;
+    --body-font: 'DM Sans', sans-serif;
+    --mono-font: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body-font);
+    font-weight: 400;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: all 0.15s ease;
+    opacity: 0.5;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(7,10,15,0.85);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--heading-font);
+    font-size: 28px; letter-spacing: 3px;
+    color: var(--accent);
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono-font); font-size: 12px;
+    color: var(--muted); text-decoration: none; letter-spacing: 2px;
+    text-transform: uppercase; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 60px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+  .hero-glow {
+    position: absolute; top: 20%; left: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: 10%; right: -5%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero-tag {
+    font-family: var(--mono-font); font-size: 11px;
+    color: var(--accent); letter-spacing: 4px; text-transform: uppercase;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero-tag::before {
+    content: ''; width: 40px; height: 1px; background: var(--accent);
+  }
+  .hero-name {
+    font-family: var(--heading-font);
+    font-size: clamp(80px, 10vw, 140px);
+    line-height: 0.9; letter-spacing: 4px;
+    color: var(--text);
+    opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-title {
+    font-size: 18px; color: var(--muted); font-weight: 300;
+    margin-top: 28px; line-height: 1.6; max-width: 560px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--accent); color: var(--bg);
+    font-family: var(--mono-font); font-size: 12px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+    transition: all 0.3s; border: none; cursor: none;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover { background: var(--text); transform: translateY(-2px); }
+  .btn-secondary {
+    padding: 14px 32px;
+    border: 1px solid var(--border); color: var(--muted);
+    font-family: var(--mono-font); font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+    transition: all 0.3s; cursor: none;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex; gap: 48px; margin-top: 72px;
+    opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+  .stat-number {
+    font-family: var(--heading-font); font-size: 42px;
+    color: var(--accent); letter-spacing: 2px;
+  }
+  .stat-label {
+    font-family: var(--mono-font); font-size: 10px;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; position: relative; }
+  .section-label {
+    font-family: var(--mono-font); font-size: 11px;
+    color: var(--accent); letter-spacing: 4px; text-transform: uppercase;
+    margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--heading-font); font-size: clamp(48px, 6vw, 80px);
+    letter-spacing: 3px; line-height: 1; margin-bottom: 60px;
+  }
+
+  /* METRICS SECTION */
+  .metrics-section { background: var(--surface); }
+  .metrics-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  }
+  .metric-card {
+    background: var(--surface2); padding: 48px 36px;
+    border: 1px solid var(--border);
+    transition: all 0.4s; position: relative; overflow: hidden;
+  }
+  .metric-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 0; background: var(--accent);
+    transition: height 0.4s;
+  }
+  .metric-card:hover::before { height: 100%; }
+  .metric-card:hover { border-color: rgba(0,212,255,0.3); transform: translateY(-4px); }
+  .metric-icon {
+    font-size: 28px; margin-bottom: 16px;
+    display: block;
+  }
+  .metric-value {
+    font-family: var(--heading-font); font-size: 56px;
+    color: var(--accent); letter-spacing: 2px; line-height: 1;
+  }
+  .metric-value.orange { color: var(--accent2); }
+  .metric-value.green { color: var(--accent3); }
+  .metric-card:nth-child(2) .metric-value { color: var(--accent2); }
+  .metric-card:nth-child(3) .metric-value { color: var(--accent3); }
+  .metric-card:nth-child(4) .metric-value { color: #c084fc; }
+  .metric-desc {
+    font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.5;
+  }
+  .metric-title {
+    font-family: var(--mono-font); font-size: 11px;
+    color: var(--text); letter-spacing: 2px; text-transform: uppercase;
+    margin-top: 12px;
+  }
+
+  /* EXPERIENCE */
+  .experience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .exp-card {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 44px; transition: all 0.4s; position: relative; overflow: hidden;
+  }
+  .exp-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,212,255,0.03) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .exp-card:hover::after { opacity: 1; }
+  .exp-card:hover { border-color: rgba(0,212,255,0.25); }
+  .exp-period {
+    font-family: var(--mono-font); font-size: 11px;
+    color: var(--accent); letter-spacing: 2px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .exp-period::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    animation: blink 2s infinite;
+  }
+  @keyframes blink {
+    0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+  }
+  .exp-role {
+    font-family: var(--heading-font); font-size: 32px;
+    letter-spacing: 2px; margin-bottom: 6px;
+  }
+  .exp-company {
+    font-size: 14px; color: var(--accent2); font-weight: 500;
+    margin-bottom: 24px; letter-spacing: 1px;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .exp-bullets li {
+    font-size: 13px; color: var(--muted); line-height: 1.6;
+    padding-left: 16px; position: relative;
+  }
+  .exp-bullets li::before {
+    content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 10px;
+  }
+  .exp-highlight {
+    margin-top: 28px; padding: 16px 20px;
+    background: rgba(0,212,255,0.05); border-left: 2px solid var(--accent);
+  }
+  .exp-highlight-text {
+    font-family: var(--mono-font); font-size: 12px; color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  /* SKILLS SECTION */
+  .skills-section { background: var(--surface); }
+  .skills-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .skill-group-title {
+    font-family: var(--mono-font); font-size: 11px;
+    color: var(--accent2); letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .skill-bar-item { margin-bottom: 24px; }
+  .skill-bar-header {
+    display: flex; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .skill-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .skill-pct {
+    font-family: var(--mono-font); font-size: 11px; color: var(--accent);
+  }
+  .skill-track {
+    height: 3px; background: var(--border); position: relative;
+  }
+  .skill-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0; transition: width 1.5s cubic-bezier(0.25,1,0.5,1);
+    position: relative;
+  }
+  .skill-fill::after {
+    content: ''; position: absolute; right: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    background: var(--accent2); border-radius: 50%;
+  }
+  .skills-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .tag {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    font-family: var(--mono-font); font-size: 11px;
+    color: var(--muted); letter-spacing: 1px;
+    transition: all 0.3s; cursor: default;
+  }
+  .tag:hover {
+    border-color: var(--accent); color: var(--accent);
+    background: rgba(0,212,255,0.05);
+  }
+
+  /* COMPANIES / CLIENTS */
+  .companies-section {}
+  .companies-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .company-card {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 36px 32px; transition: all 0.4s; position: relative;
+  }
+  .company-card:hover { background: var(--surface2); border-color: rgba(0,212,255,0.2); }
+  .company-badge {
+    display: inline-block; padding: 4px 10px;
+    background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);
+    font-family: var(--mono-font); font-size: 9px;
+    color: var(--accent); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .company-name {
+    font-family: var(--heading-font); font-size: 24px;
+    letter-spacing: 2px; margin-bottom: 8px; color: var(--text);
+  }
+  .company-location {
+    font-family: var(--mono-font); font-size: 10px;
+    color: var(--muted); letter-spacing: 2px; margin-bottom: 16px;
+  }
+  .company-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .company-role-tag {
+    margin-top: 16px; display: inline-block;
+    padding: 5px 12px; background: rgba(255,107,53,0.08);
+    border: 1px solid rgba(255,107,53,0.2);
+    font-family: var(--mono-font); font-size: 9px;
+    color: var(--accent2); letter-spacing: 2px;
+  }
+
+  /* PERFORMANCE DASHBOARD */
+  .dashboard-section { background: var(--surface); }
+  .dashboard-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; }
+  .dashboard-card {
+    background: var(--bg); border: 1px solid var(--border); padding: 36px;
+  }
+  .dash-title {
+    font-family: var(--mono-font); font-size: 11px;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .dash-live {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 10px; color: var(--accent3);
+  }
+  .dash-live::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--accent3); border-radius: 50%;
+    animation: blink 1.5s infinite;
+  }
+  /* BAR CHART */
+  .bar-chart { display: flex; align-items: flex-end; gap: 10px; height: 160px; }
+  .bar-col { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+  .bar {
+    width: 100%; border-radius: 2px 2px 0 0;
+    transition: height 1s cubic-bezier(0.25,1,0.5,1);
+    position: relative;
+  }
+  .bar-val {
+    position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    font-family: var(--mono-font); font-size: 9px; color: var(--accent); white-space: nowrap;
+  }
+  .bar-lbl { font-family: var(--mono-font); font-size: 9px; color: var(--muted); letter-spacing: 1px; }
+  /* PIE-LIKE donut (CSS only) */
+  .donut-wrap { display: flex; flex-direction: column; gap: 20px; }
+  .donut-item { display: flex; align-items: center; gap: 16px; }
+  .donut-bar-track { flex: 1; height: 4px; background: var(--border); }
+  .donut-bar-fill { height: 100%; border-radius: 2px; }
+  .donut-item-label { font-family: var(--mono-font); font-size: 11px; color: var(--muted); width: 140px; }
+  .donut-pct { font-family: var(--mono-font); font-size: 11px; color: var(--accent); width: 36px; text-align: right; }
+
+  /* KPI CARDS in dashboard */
+  .kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+  .kpi-mini {
+    background: var(--surface2); padding: 20px;
+    border: 1px solid var(--border);
+  }
+  .kpi-mini-val {
+    font-family: var(--heading-font); font-size: 32px; color: var(--text);
+  }
+  .kpi-mini-label {
+    font-family: var(--mono-font); font-size: 9px;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;
+  }
+  .kpi-mini-delta {
+    font-family: var(--mono-font); font-size: 10px; color: var(--accent3);
+    margin-top: 8px;
+  }
+
+  /* EDUCATION */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .edu-card {
+    border: 1px solid var(--border); padding: 40px;
+    background: var(--surface); position: relative; overflow: hidden;
+  }
+  .edu-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .edu-degree {
+    font-family: var(--heading-font); font-size: 28px; letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .edu-inst { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  .edu-meta { display: flex; gap: 24px; }
+  .edu-tag2 {
+    padding: 6px 14px; background: rgba(0,212,255,0.08);
+    font-family: var(--mono-font); font-size: 11px; color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  /* CONTACT */
+  .contact-section { background: var(--surface); }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .contact-big {
+    font-family: var(--heading-font); font-size: clamp(52px, 7vw, 96px);
+    line-height: 0.9; letter-spacing: 3px;
+  }
+  .contact-big span { color: var(--accent); }
+  .contact-items { display: flex; flex-direction: column; gap: 24px; margin-top: 20px; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 20px; border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .contact-item:hover { border-color: var(--accent); }
+  .contact-icon { font-size: 20px; margin-top: 2px; }
+  .contact-label {
+    font-family: var(--mono-font); font-size: 10px;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .contact-val { font-size: 15px; color: var(--text); margin-top: 4px; font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-name {
+    font-family: var(--heading-font); font-size: 20px;
+    letter-spacing: 3px; color: var(--muted);
+  }
+  .footer-copy {
+    font-family: var(--mono-font); font-size: 10px;
+    color: var(--muted); letter-spacing: 2px;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* HORIZONTAL MARQUEE */
+  .marquee-wrap { overflow: hidden; padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 60px; }
+  .marquee-track {
+    display: flex; gap: 60px;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: var(--heading-font); font-size: 18px;
+    letter-spacing: 4px; color: var(--muted); text-transform: uppercase;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .marquee-item::after { content: '◆'; color: var(--accent); font-size: 10px; }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Responsive basics */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 60px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .metrics-grid, .experience-grid, .companies-grid, .edu-grid,
+    .skills-wrapper, .dashboard-grid, .contact-inner {
+      grid-template-columns: 1fr;
+    }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">HKY</div>
+  <ul class="nav-links">
+    <li><a href="#metrics">Metrics</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#companies">Companies</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Performance Marketing Specialist</div>
+    <h1 class="hero-name">HEMANT<br><span>KUMAR</span><br>YADAV</h1>
+    <p class="hero-title">Business Analyst · Performance & Organic Marketing · Web Development<br>
+    Bridging business and technology with data-driven strategies, conversion optimization, and measurable growth.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get In Touch</a>
+      <a href="#experience" class="btn-secondary">View Work</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number" data-target="25">0</div>
+        <div class="stat-label">% Efficiency Gain</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="2">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="9.2">0</div>
+        <div class="stat-label">CGPA</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="15">0</div>
+        <div class="stat-label">Core Skills</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">Performance Marketing</span>
+    <span class="marquee-item">Campaign Analysis</span>
+    <span class="marquee-item">SEO Optimization</span>
+    <span class="marquee-item">Data Analytics</span>
+    <span class="marquee-item">A/B Testing</span>
+    <span class="marquee-item">Conversion Funnels</span>
+    <span class="marquee-item">Business Analysis</span>
+    <span class="marquee-item">Web Development</span>
+    <span class="marquee-item">Excel Dashboards</span>
+    <span class="marquee-item">Performance Marketing</span>
+    <span class="marquee-item">Campaign Analysis</span>
+    <span class="marquee-item">SEO Optimization</span>
+    <span class="marquee-item">Data Analytics</span>
+    <span class="marquee-item">A/B Testing</span>
+    <span class="marquee-item">Conversion Funnels</span>
+    <span class="marquee-item">Business Analysis</span>
+    <span class="marquee-item">Web Development</span>
+    <span class="marquee-item">Excel Dashboards</span>
+  </div>
+</div>
+
+<!-- METRICS -->
+<section class="metrics-section" id="metrics">
+  <div class="section-label">Impact Numbers</div>
+  <h2 class="section-title">KEY <span style="color:var(--accent)">METRICS</span></h2>
+  <div class="metrics-grid reveal">
+    <div class="metric-card">
+      <span class="metric-icon">📈</span>
+      <div class="metric-value" data-count="25">0</div><span style="font-family:var(--heading-font);font-size:32px;color:var(--accent)">%</span>
+      <div class="metric-title">Efficiency Improvement</div>
+      <div class="metric-desc">Optimized survey scripting processes at KANTAR, cutting turnaround time by a quarter through workflow automation</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">🎯</span>
+      <div class="metric-value" data-count="500">0</div><span style="font-family:var(--heading-font);font-size:32px;color:var(--accent2)">+</span>
+      <div class="metric-title">Campaigns Tracked</div>
+      <div class="metric-desc">Performance and organic marketing campaigns analyzed across multiple clients with Excel-based dashboards</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">⚡</span>
+      <div class="metric-value" data-count="40">0</div><span style="font-family:var(--heading-font);font-size:32px;color:var(--accent3)">%</span>
+      <div class="metric-title">Faster Insights Delivery</div>
+      <div class="metric-desc">Streamlined data collection and reporting pipelines accelerated marketing insight generation across teams</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">🧩</span>
+      <div class="metric-value" data-count="100">0</div><span style="font-family:var(--heading-font);font-size:32px;color:#c084fc">+</span>
+      <div class="metric-title">Surveys Scripted</div>
+      <div class="metric-desc">End-to-end survey logic built with advanced quotas, validation, and segmentation for brand performance tracking</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Work History</div>
+  <h2 class="section-title">WORK <span style="color:var(--accent)">EXPERIENCE</span></h2>
+  <div class="experience-grid reveal">
+    <div class="exp-card">
+      <div class="exp-period">Jun 2024 — Sep 2025 · Full Time</div>
+      <div class="exp-role">Executive Scripter &<br>Marketing Ops</div>
+      <div class="exp-company">KANTAR — Global Research Leader</div>
+      <ul class="exp-bullets">
+        <li>Translated client briefs into complex survey logic aligned with campaign tracking and marketing KPIs</li>
+        <li>Implemented validation rules, quota controls, and audience segmentation for targeted performance insights</li>
+        <li>Collaborated across marketing, operations, and project teams to meet strict execution timelines</li>
+        <li>Delivered support for campaign analysis, customer feedback studies, and brand performance tracking</li>
+        <li>Diagnosed and resolved scripting issues ensuring zero-downtime data collection pipelines</li>
+        <li>Redesigned survey workflows improving process efficiency by ~25%</li>
+      </ul>
+      <div class="exp-highlight">
+        <div class="exp-highlight-text">⚡ 25% efficiency gain through process optimization</div>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-period">Feb 2023 — Aug 2023 · Internship</div>
+      <div class="exp-role">Business Analyst<br>Intern</div>
+      <div class="exp-company">Miriyala Worldwide INC. — Digital Agency</div>
+      <ul class="exp-bullets">
+        <li>Analyzed campaign performance, website traffic, and operational data for actionable decision-making</li>
+        <li>Built Excel-based dashboards enabling data-driven decisions across marketing and operations</li>
+        <li>Supported performance marketing and organic marketing initiatives including SEO insights</li>
+        <li>Developed campaign tracking systems and lead analysis frameworks for client accounts</li>
+        <li>Collaborated with web dev teams to optimize website structure, landing pages, and conversion funnels</li>
+      </ul>
+      <div class="exp-highlight">
+        <div class="exp-highlight-text" style="color:var(--accent2);">🚀 Full-funnel optimization from traffic to conversion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title">CORE <span style="color:var(--accent)">SKILLS</span></h2>
+  <div class="skills-wrapper reveal">
+    <div>
+      <div class="skill-group-title">// Proficiency Levels</div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-name">Business & Data Analysis</span>
+          <span class="skill-pct">92%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-name">Performance Marketing</span>
+          <span class="skill-pct">88%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-name">SEO / Organic Marketing</span>
+          <span class="skill-pct">84%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-width="84"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-name">Excel & Dashboards</span>
+          <span class="skill-pct">90%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-name">Web Development (HTML/CSS/WP)</span>
+          <span class="skill-pct">78%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-width="78"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header">
+          <span class="skill-name">Conversion Optimization & A/B Testing</span>
+          <span class="skill-pct">82%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-width="82"></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-title">// All Skills</div>
+      <div class="skills-tags">
+        <span class="tag">Business Analysis</span>
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Performance Marketing</span>
+        <span class="tag">A/B Testing</span>
+        <span class="tag">Organic Marketing</span>
+        <span class="tag">SEO</span>
+        <span class="tag">Web Analytics</span>
+        <span class="tag">Conversion Optimization</span>
+        <span class="tag">Time Management</span>
+        <span class="tag">Operations Management</span>
+        <span class="tag">Excel & Dashboards</span>
+        <span class="tag">Client Handling</span>
+        <span class="tag">Team Collaboration</span>
+        <span class="tag">HTML / CSS</span>
+        <span class="tag">WordPress</span>
+        <span class="tag">AI Tools</span>
+        <span class="tag">Survey Research</span>
+        <span class="tag">Lead Analysis</span>
+        <span class="tag">Campaign Tracking</span>
+        <span class="tag">Audience Segmentation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<section id="companies">
+  <div class="section-label">Opportunities & Target Markets</div>
+  <h2 class="section-title">INDIA <span style="color:var(--accent)">COMPANIES</span></h2>
+  <p style="color:var(--muted);font-size:14px;margin-bottom:48px;font-family:var(--mono-font);letter-spacing:1px;">Growth-stage companies across India where my skill set creates the most value</p>
+  <div class="companies-grid reveal">
+    <div class="company-card">
+      <div class="company-badge">Mumbai · Fintech</div>
+      <div class="company-name">RAZORPAY</div>
+      <div class="company-location">📍 Bengaluru, Karnataka</div>
+      <div class="company-desc">India's leading payment gateway. Performance marketing analyst role to optimize merchant acquisition funnels, A/B test landing pages, and improve CAC through data-driven campaigns.</div>
+      <div class="company-role-tag">Growth & Performance Marketing</div>
+    </div>
+    <div class="company-card">
+      <div class="company-badge">Gurugram · Edtech</div>
+      <div class="company-name">UNACADEMY</div>
+      <div class="company-location">📍 Bengaluru, Karnataka</div>
+      <div class="company-desc">Leading online education platform. Business analyst role analyzing learner acquisition campaigns, SEO content performance, and conversion funnel optimization for course enrollments.</div>
+      <div class="company-role-tag">Business Analyst · EdTech Marketing</div>
+    </div>
+    <div class="company-card">
+      <div class="company-badge">Mumbai · D2C</div>
+      <div class="company-name">MAMAEARTH</div>
+      <div class="company-location">📍 Gurugram, Haryana</div>
+      <div class="company-desc">India's fastest-growing D2C beauty brand. Opportunity to analyze performance campaigns across Meta and Google, optimize product page conversions, and support organic SEO growth.</div>
+      <div class="company-role-tag">D2C Performance Marketing</div>
+    </div>
+    <div class="company-card">
+      <div class="company-badge">Pune · SaaS</div>
+      <div class="company-name">CLEARTAX</div>
+      <div class="company-location">📍 Bengaluru, Karnataka</div>
+      <div class="company-desc">India's largest tax filing platform. Analytics and campaign management for user acquisition during peak tax seasons, with data-driven insights across paid and organic channels.</div>
+      <div class="company-role-tag">Marketing Analytics · SaaS</div>
+    </div>
+    <div class="company-card">
+      <div class="company-badge">Kolkata · E-commerce</div>
+      <div class="company-name">MEESHO</div>
+      <div class="company-location">📍 Bengaluru, Karnataka</div>
+      <div class="company-desc">Social commerce platform with millions of resellers. Campaign performance analysis, seller onboarding funnel optimization, and data-driven marketing operations across Tier 2/3 cities.</div>
+      <div class="company-role-tag">E-Commerce Growth Analytics</div>
+    </div>
+    <div class="company-card">
+      <div class="company-badge">Chennai · Health</div>
+      <div class="company-name">PRISTYN CARE</div>
+      <div class="company-location">📍 Gurugram, Haryana</div>
+      <div class="company-desc">Healthcare startup scaling across India. Performance marketing role to manage lead generation campaigns, patient acquisition funnels, and SEO for healthcare content optimization.</div>
+      <div class="company-role-tag">Healthcare Performance Marketing</div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFORMANCE DASHBOARD -->
+<section class="dashboard-section" id="dashboard">
+  <div class="section-label">Analytics Snapshot</div>
+  <h2 class="section-title">PERFORMANCE <span style="color:var(--accent)">DASHBOARD</span></h2>
+  <div class="dashboard-grid reveal">
+    <div>
+      <div class="dashboard-card">
+        <div class="dash-title">
+          <span>Campaign Performance (Simulated)</span>
+          <span class="dash-live">LIVE</span>
+        </div>
+        <div class="bar-chart" id="barChart">
+          <!-- rendered by JS -->
+        </div>
+        <div style="display:flex;gap:6px;margin-top:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono-font);font-size:9px;color:var(--muted);padding:4px 10px;border:1px solid var(--border);">■ Organic</span>
+          <span style="font-family:var(--mono-font);font-size:9px;color:var(--muted);padding:4px 10px;border:1px solid var(--border);">■ Paid</span>
+          <span style="font-family:var(--mono-font);font-size:9px;color:var(--muted);padding:4px 10px;border:1px solid var(--border);">■ SEO</span>
+        </div>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-mini">
+          <div class="kpi-mini-val">4.2x</div>
+          <div class="kpi-mini-label">Avg ROAS Target</div>
+          <div class="kpi-mini-delta">↑ +18% vs baseline</div>
+        </div>
+        <div class="kpi-mini">
+          <div class="kpi-mini-val">62%</div>
+          <div class="kpi-mini-label">CTR Improvement</div>
+          <div class="kpi-mini-delta">↑ Post A/B Testing</div>
+        </div>
+        <div class="kpi-mini">
+          <div class="kpi-mini-val">34%</div>
+          <div class="kpi-mini-label">CPA Reduction</div>
+          <div class="kpi-mini-delta">↓ Funnel Optimization</div>
+        </div>
+        <div class="kpi-mini">
+          <div class="kpi-mini-val">91%</div>
+          <div class="kpi-mini-label">Data Accuracy</div>
+          <div class="kpi-mini-delta">↑ Validated Pipelines</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="dashboard-card" style="height:100%;">
+        <div class="dash-title">Channel Mix Breakdown</div>
+        <div class="donut-wrap">
+          <div class="donut-item">
+            <div class="donut-item-label">Performance / Paid</div>
+            <div class="donut-bar-track"><div class="donut-bar-fill" style="width:0%;background:var(--accent)" data-width="78"></div></div>
+            <div class="donut-pct">78%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-item-label">Organic SEO</div>
+            <div class="donut-bar-track"><div class="donut-bar-fill" style="width:0%;background:var(--accent2)" data-width="65"></div></div>
+            <div class="donut-pct">65%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-item-label">Email Marketing</div>
+            <div class="donut-bar-track"><div class="donut-bar-fill" style="width:0%;background:var(--accent3)" data-width="45"></div></div>
+            <div class="donut-pct">45%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-item-label">Social Media</div>
+            <div class="donut-bar-track"><div class="donut-bar-fill" style="width:0%;background:#c084fc" data-width="58"></div></div>
+            <div class="donut-pct">58%</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-item-label">Content / Blog</div>
+            <div class="donut-bar-track"><div class="donut-bar-fill" style="width:0%;background:#fbbf24" data-width="52"></div></div>
+            <div class="donut-pct">52%</div>
+          </div>
+        </div>
+        <div style="margin-top:32px;padding:20px;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);">
+          <div style="font-family:var(--mono-font);font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:8px;">ANALYST INSIGHT</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.6;">Performance channels deliver highest ROI but SEO builds sustainable, compounding growth. Optimal strategy: 60/40 split between paid and organic.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Academic Background</div>
+  <h2 class="section-title">EDUCATION</h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-degree">B.Tech — Computer Science</div>
+      <div class="edu-inst">Budge Budge Institute of Technology, Kolkata</div>
+      <div class="edu-meta">
+        <span class="edu-tag2">2020 — 2024</span>
+        <span class="edu-tag2" style="background:rgba(57,255,20,0.08);color:var(--accent3)">CGPA: 9.2 / 10</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:20px;line-height:1.6;">Strong foundation in computer science combined with business and marketing skills. Exceptional academic record demonstrates analytical ability and commitment.</p>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Class X & XII</div>
+      <div class="edu-inst">Sister Nivedita Institute, West Bengal</div>
+      <div class="edu-meta">
+        <span class="edu-tag2">2016 — 2019</span>
+        <span class="edu-tag2" style="background:rgba(255,107,53,0.08);color:var(--accent2)">Score: 80%</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:20px;line-height:1.6;">Solid academic foundation with strong performance across core subjects, establishing the analytical and disciplined approach carried into professional career.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label">Let's Connect</div>
+  <div class="contact-inner reveal">
+    <div>
+      <h2 class="contact-big">LET'S<br>WORK<br><span>TOGETHER.</span></h2>
+      <p style="font-size:14px;color:var(--muted);margin-top:28px;line-height:1.8;max-width:360px;">Open to full-time roles, freelance projects, and consulting engagements in Performance Marketing, Business Analysis, and Growth Strategy.</p>
+    </div>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val">hemantkryadav07@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-val">+91 9163599167</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-val">Kolkata, West Bengal, India</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">💼</div>
+        <div>
+          <div class="contact-label">Available For</div>
+          <div class="contact-val">Full-time · Freelance · Remote</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">HEMANT KUMAR YADAV</div>
+  <div class="footer-copy">© 2025 · Business Analyst · Kolkata, India</div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) *.12;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // COUNTER ANIMATION (hero stats)
+  function animateCounter(el, target, decimals = 0) {
+    const dur = 2000, start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const val = p * target;
+      el.textContent = decimals ? val.toFixed(1) : Math.floor(val);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = decimals ? target.toFixed(1) : target;
+    }
+    requestAnimationFrame(step);
+  }
+  const heroStats = document.querySelectorAll('.hero-stats .stat-number');
+  const heroObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const t = parseFloat(e.target.dataset.target);
+        const dec = t % 1 !== 0;
+        animateCounter(e.target, t, dec);
+        heroObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  heroStats.forEach(s => heroObs.observe(s));
+
+  // METRIC CARD COUNTERS
+  const metricVals = document.querySelectorAll('.metric-value[data-count]');
+  const metObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const t = parseInt(e.target.dataset.count);
+        animateCounter(e.target, t);
+        metObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  metricVals.forEach(m => metObs.observe(m));
+
+  // SKILL BARS
+  const fills = document.querySelectorAll('.skill-fill[data-width]');
+  const skillObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.width + '%';
+        skillObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  fills.forEach(f => skillObs.observe(f));
+
+  // DONUT BARS
+  const donutFills = document.querySelectorAll('.donut-bar-fill[data-width]');
+  const donutObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.width + '%';
+        donutObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  donutFills.forEach(d => donutObs.observe(d));
+
+  // BAR CHART (dynamic)
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'];
+  const organicData = [42, 55, 48, 62, 70, 65, 80, 75, 88];
+  const paidData    = [60, 72, 68, 85, 78, 92, 88, 95, 100];
+  const seoData     = [30, 38, 42, 50, 55, 60, 68, 72, 80];
+  const colors = [
+    'linear-gradient(180deg,var(--accent),rgba(0,212,255,0.3))',
+    'linear-gradient(180deg,var(--accent2),rgba(255,107,53,0.3))',
+    'linear-gradient(180deg,var(--accent3),rgba(57,255,20,0.3))'
+  ];
+  const barChart = document.getElementById('barChart');
+  months.forEach((m, i) => {
+    const maxH = 140;
+    const col = document.createElement('div');
+    col.className = 'bar-col';
+    [organicData[i], paidData[i], seoData[i]].forEach((v, ci) => {
+      const h = Math.round((v / 100) * maxH);
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.cssText = `height:0px;background:${colors[ci]};transition:height 1.2s cubic-bezier(0.25,1,0.5,1) ${ci*0.1 + i*0.06}s;`;
+      bar.innerHTML = ci===0 ? `<span class="bar-val">${v}</span>` : '';
+      col.appendChild(bar);
+      setTimeout(() => bar.style.height = h + 'px', 500);
+    });
+    const lbl = document.createElement('div');
+    lbl.className = 'bar-lbl'; lbl.textContent = m;
+    col.appendChild(lbl);
+    barChart.appendChild(col);
+  });
+
+  // NAV active state
+  window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.nav-links a');
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    links.forEach(l => {
+      l.style.color = l.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
