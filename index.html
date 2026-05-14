@@ -71,11 +71,7 @@
     background: rgba(7,10,15,0.85);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo {
-    font-family: var(--heading-font);
-    font-size: 28px; letter-spacing: 3px;
-    color: var(--accent);
-  }
+  .nav-logo svg { display: block; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
     font-family: var(--mono-font); font-size: 12px;
@@ -535,7 +531,25 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">HKY</div>
+  <div class="nav-logo">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer hexagon ring -->
+      <polygon points="24,2 44,13 44,35 24,46 4,35 4,13" stroke="#00d4ff" stroke-width="1.2" fill="none" opacity="0.4"/>
+      <!-- Inner hexagon -->
+      <polygon points="24,8 38,16 38,32 24,40 10,32 10,16" stroke="#00d4ff" stroke-width="0.8" fill="rgba(0,212,255,0.05)"/>
+      <!-- H letterform -->
+      <line x1="17" y1="17" x2="17" y2="31" stroke="#00d4ff" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="31" y1="17" x2="31" y2="31" stroke="#00d4ff" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="17" y1="24" x2="31" y2="24" stroke="#00d4ff" stroke-width="2.2" stroke-linecap="round"/>
+      <!-- Corner dots -->
+      <circle cx="24" cy="2" r="1.5" fill="#00d4ff"/>
+      <circle cx="44" cy="13" r="1.5" fill="#00d4ff" opacity="0.5"/>
+      <circle cx="44" cy="35" r="1.5" fill="#00d4ff" opacity="0.5"/>
+      <circle cx="24" cy="46" r="1.5" fill="#00d4ff"/>
+      <circle cx="4" cy="35" r="1.5" fill="#00d4ff" opacity="0.5"/>
+      <circle cx="4" cy="13" r="1.5" fill="#00d4ff" opacity="0.5"/>
+    </svg>
+  </div>
   <ul class="nav-links">
     <li><a href="#metrics">Metrics</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -761,46 +775,46 @@
   <p style="color:var(--muted);font-size:14px;margin-bottom:48px;font-family:var(--mono-font);letter-spacing:1px;">Growth-stage companies across India where my skill set creates the most value</p>
   <div class="companies-grid reveal">
     <div class="company-card">
-      <div class="company-badge">Mumbai · Fintech</div>
-      <div class="company-name">RAZORPAY</div>
-      <div class="company-location">📍 Bengaluru, Karnataka</div>
-      <div class="company-desc">India's leading payment gateway. Performance marketing analyst role to optimize merchant acquisition funnels, A/B test landing pages, and improve CAC through data-driven campaigns.</div>
-      <div class="company-role-tag">Growth & Performance Marketing</div>
+      <div class="company-badge">Kolkata · Digital Agency</div>
+      <div class="company-name">WEBIXAR</div>
+      <div class="company-location">📍 Salt Lake, Kolkata</div>
+      <div class="company-desc">Small web & digital marketing agency serving local SMEs. Opportunity to manage paid campaigns, improve landing page conversions, and deliver SEO audits for 10–15 clients.</div>
+      <div class="company-role-tag">Performance Marketing Analyst</div>
     </div>
     <div class="company-card">
-      <div class="company-badge">Gurugram · Edtech</div>
-      <div class="company-name">UNACADEMY</div>
-      <div class="company-location">📍 Bengaluru, Karnataka</div>
-      <div class="company-desc">Leading online education platform. Business analyst role analyzing learner acquisition campaigns, SEO content performance, and conversion funnel optimization for course enrollments.</div>
-      <div class="company-role-tag">Business Analyst · EdTech Marketing</div>
+      <div class="company-badge">Pune · SaaS Startup</div>
+      <div class="company-name">TASKROBIN</div>
+      <div class="company-location">📍 Kothrud, Pune</div>
+      <div class="company-desc">Early-stage B2B SaaS tool for task automation. Looking for a BA to track user acquisition metrics, run A/B tests on onboarding flows, and build campaign performance dashboards.</div>
+      <div class="company-role-tag">Business Analyst · SaaS Growth</div>
     </div>
     <div class="company-card">
-      <div class="company-badge">Mumbai · D2C</div>
-      <div class="company-name">MAMAEARTH</div>
-      <div class="company-location">📍 Gurugram, Haryana</div>
-      <div class="company-desc">India's fastest-growing D2C beauty brand. Opportunity to analyze performance campaigns across Meta and Google, optimize product page conversions, and support organic SEO growth.</div>
-      <div class="company-role-tag">D2C Performance Marketing</div>
+      <div class="company-badge">Jaipur · E-commerce</div>
+      <div class="company-name">CRAFTBAY</div>
+      <div class="company-location">📍 Malviya Nagar, Jaipur</div>
+      <div class="company-desc">Handicraft marketplace connecting Rajasthani artisans to online buyers. Needs campaign tracking, Google Ads management, and SEO to scale product discovery and sales.</div>
+      <div class="company-role-tag">E-commerce Marketing Ops</div>
     </div>
     <div class="company-card">
-      <div class="company-badge">Pune · SaaS</div>
-      <div class="company-name">CLEARTAX</div>
-      <div class="company-location">📍 Bengaluru, Karnataka</div>
-      <div class="company-desc">India's largest tax filing platform. Analytics and campaign management for user acquisition during peak tax seasons, with data-driven insights across paid and organic channels.</div>
-      <div class="company-role-tag">Marketing Analytics · SaaS</div>
+      <div class="company-badge">Hyderabad · Edtech</div>
+      <div class="company-name">LEARNVIBE</div>
+      <div class="company-location">📍 Hitech City, Hyderabad</div>
+      <div class="company-desc">Micro-learning platform for skill-based courses. Seeking a marketing analyst to monitor lead pipelines, run segmentation experiments, and report on course enrollment funnels.</div>
+      <div class="company-role-tag">Marketing Analytics · EdTech</div>
     </div>
     <div class="company-card">
-      <div class="company-badge">Kolkata · E-commerce</div>
-      <div class="company-name">MEESHO</div>
-      <div class="company-location">📍 Bengaluru, Karnataka</div>
-      <div class="company-desc">Social commerce platform with millions of resellers. Campaign performance analysis, seller onboarding funnel optimization, and data-driven marketing operations across Tier 2/3 cities.</div>
-      <div class="company-role-tag">E-Commerce Growth Analytics</div>
+      <div class="company-badge">Mumbai · D2C Brand</div>
+      <div class="company-name">GRAINLY</div>
+      <div class="company-location">📍 Andheri, Mumbai</div>
+      <div class="company-desc">Organic food D2C startup selling healthy snacks via Instagram and their own website. Needs someone to manage Meta Ads, track ROAS, and optimize the checkout conversion rate.</div>
+      <div class="company-role-tag">D2C Performance & Growth</div>
     </div>
     <div class="company-card">
-      <div class="company-badge">Chennai · Health</div>
-      <div class="company-name">PRISTYN CARE</div>
-      <div class="company-location">📍 Gurugram, Haryana</div>
-      <div class="company-desc">Healthcare startup scaling across India. Performance marketing role to manage lead generation campaigns, patient acquisition funnels, and SEO for healthcare content optimization.</div>
-      <div class="company-role-tag">Healthcare Performance Marketing</div>
+      <div class="company-badge">Chennai · HR Tech</div>
+      <div class="company-name">HIREPATH</div>
+      <div class="company-location">📍 Anna Nagar, Chennai</div>
+      <div class="company-desc">Bootstrapped HR-tech platform matching candidates to SME job openings. Looking for a BA to analyze recruiter behavior, improve job post CTRs, and build weekly ops dashboards.</div>
+      <div class="company-role-tag">Business Analyst · HR Tech</div>
     </div>
   </div>
 </section>
